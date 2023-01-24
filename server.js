@@ -48,6 +48,6 @@ app.get('/api/:animalKingdom', (request,response) => {
     }
 })
 
-app.listen(PORT, ()=> {
+app.listen(process.env.PORT || PORT, ()=> {
     console.log(`The server is running on ${PORT}! Don't let it get away!`)
 })
