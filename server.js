@@ -26,6 +26,9 @@ const animals = {
     },
     'plant': {
         'fact': 'something leafy'
+    },
+    'unrecognised': {
+        'fact': 'We did not recognise that animal :('
     }
 }
 
@@ -34,17 +37,13 @@ app.get('/', (request,response) => {
     response.sendFile(__dirname + '/index.html')
 })
 
-app.get('/js/main.js', (request,response) => {
-    response.sendFile(__dirname + '/js/main.js')
-})
-
-app.get('/api/:animalKingdom', (request,response) => {
-    const selectedKingdom = request.params.animalKingdom.toLowerCase()
-    if (animals[selectedKingdom]) {
-        response.json(animals[selectedKingdom])
+app.get('/api/:kingdom', (request,response) => {
+    const animalKingdom = request.params.kingdom.toLowerCase()
+    if (animals[animalKingdom]) {
+        response.json(animals[animalKingdom])
     }
     else {
-        response.json(`'We didn't recognise that animal :(`)
+        response.json(animals['unrecognised'])
     }
 })
 
